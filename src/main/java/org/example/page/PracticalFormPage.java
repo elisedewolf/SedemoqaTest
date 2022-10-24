@@ -1,14 +1,10 @@
 package org.example.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 
-import javax.swing.plaf.PanelUI;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
 
 public class PracticalFormPage {
     protected WebDriver driver;
@@ -34,6 +30,14 @@ public class PracticalFormPage {
     public void fillInMobile(String mobile) {
         WebElement mobileInput = driver.findElement(By.id("userNumber"));
         mobileInput.sendKeys(mobile);
+    }
+    public void fillInDateOfBirth(String day ,int month,String year){
+        driver.findElement(By.id("dateOfBirthInput")).click();
+        Select MonthSelect = new Select(driver.findElement(By.className("react-datepicker__month-select")));
+        MonthSelect.selectByIndex(month-1);
+        Select YearSelect = new Select(driver.findElement(By.className("react-datepicker__year-select")));
+        YearSelect.selectByValue(year);
+        driver.findElement(By.className("react-datepicker__day--0"+day)).click();
     }
     public void fillInCurrentAddress(String currentAddress) {
         WebElement currentAddressInput = driver.findElement(By.id("currentAddress"));
